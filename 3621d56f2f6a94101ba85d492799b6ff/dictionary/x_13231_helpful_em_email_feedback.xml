@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element attributes="live_feed=true" label="Email feedback" max_length="40" name="x_13231_helpful_em_email_feedback" type="collection">
+        <element label="Feedback from user" mandatory="true" max_length="32" name="feedback_from_user" reference="sys_user" reference_qual="web_service_access_only=false^EQ" reference_qual_condition="web_service_access_only=false^EQ" type="reference"/>
+        <element label="Notification" mandatory="true" max_length="32" name="notification" reference="sysevent_email_action" reference_qual="active=true^EQ" reference_qual_condition="active=true^EQ" type="reference"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+        <index name="index">
+            <element name="notification"/>
+        </index>
+        <index name="index2">
+            <element name="feedback_from_user"/>
+        </index>
+    </element>
+</database>
