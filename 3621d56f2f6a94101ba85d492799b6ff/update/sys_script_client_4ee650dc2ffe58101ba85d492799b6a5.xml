@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description/>
+        <field>user</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Check for duplicate feedback record</name>
+        <order/>
+        <script><![CDATA[function onChange(control, oldValue, newValue, isLoading, isTemplate) {
+	
+	if (!g_form.isNewRecord()) {
+		return;
+	}
+	
+	var currentFeedbackID = g_form.isNewRecord() ? '-1' : g_form.getUniqueValue();
+	var feedbackUserID = g_form.getValue('user');
+	var emailWatermark = g_form.getValue('email_watermark');
+	var notificationID = g_form.getValue('notification');
+	var gaFeedbackUtil = new GlideAjax('EmailFeedbackUtil');
+	//If true, allow the same user to submit multiple feedbacks on a single notification, as long
+	// as the email watermark is unique (or empty).
+	// var allowMultipleFeedbacks = (g_scratchpad.allow_multiple_feedbacks_from_user.toString() == 'true');
+	
+	gaFeedbackUtil.addParam('sysparm_name', 'checkForDuplicate');
+	gaFeedbackUtil.addParam('sysparm_feedback_id', currentFeedbackID);
+	gaFeedbackUtil.addParam('sysparm_user_id', feedbackUserID);
+	gaFeedbackUtil.addParam('sysparm_email_watermark', emailWatermark);
+	gaFeedbackUtil.addParam('sysparm_notification_id', notificationID);
+	gaFeedbackUtil.getXML(cbShowMessage);
+	
+	function cbShowMessage(response) {
+		var dupeLink = response.responseXML.documentElement.getAttribute('answer');
+		if (dupeLink) {
+			g_form.clearMessages();
+			g_form.addErrorMessage('It looks like feedback has already been submitted for this notification by this user. <a href="' + dupeLink + '" target="_blank">Click here</a> to view/update existing feedback.');
+		}
+	}
+	
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-08-18 20:24:13</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>4ee650dc2ffe58101ba85d492799b6a5</sys_id>
+        <sys_mod_count>11</sys_mod_count>
+        <sys_name>Check for duplicate feedback record</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
+        <sys_update_name>sys_script_client_4ee650dc2ffe58101ba85d492799b6a5</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-18 21:15:58</sys_updated_on>
+        <table>x_13231_helpful_em_email_feedback</table>
+        <type>onChange</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>
