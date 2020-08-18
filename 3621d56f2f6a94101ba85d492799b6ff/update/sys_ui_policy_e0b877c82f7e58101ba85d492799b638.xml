@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_policy">
+    <sys_ui_policy action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <conditions/>
+        <description/>
+        <global>true</global>
+        <inherit>false</inherit>
+        <isolate_script>true</isolate_script>
+        <model_id/>
+        <model_table/>
+        <on_load>true</on_load>
+        <order>100</order>
+        <reverse_if_false>false</reverse_if_false>
+        <run_scripts>true</run_scripts>
+        <script_false><![CDATA[function onCondition() {
+
+}]]></script_false>
+        <script_true><![CDATA[function onCondition() {
+	var i, fieldToHide;
+	var fieldsTohide = ['email_watermark', 'notification', 'user'];
+	var userIsAppUser = g_user.hasRole('x_13231_helpful_em.helpful_emails_user');
+	var userIsAppAdmin = g_user.hasRole('x_13231_helpful_em.helpful_emails_admin');
+	
+	if (userIsAppAdmin || userIsAppUser) {
+		return;
+	}
+	
+	for (i = 0; i < fieldsTohide.length; i++) {
+		fieldToHide = fieldsTohide[i];
+		g_form.setDisplay(fieldToHide, false);
+	}
+}]]></script_true>
+        <set_values/>
+        <short_description>Hide watermark, notification, &amp; user fields for users who aren't roled within the helpful emails app</short_description>
+        <sys_class_name>sys_ui_policy</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-08-18 18:10:06</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>e0b877c82f7e58101ba85d492799b638</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Hide watermark, notification, &amp; user fields for users who aren't roled within the helpful emails app</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
+        <sys_update_name>sys_ui_policy_e0b877c82f7e58101ba85d492799b638</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-18 18:22:37</sys_updated_on>
+        <table>x_13231_helpful_em_email_feedback</table>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_ui_policy>
+</record_update>

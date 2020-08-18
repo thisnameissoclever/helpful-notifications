@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_index">
+    <sys_index action="INSERT_OR_UPDATE">
+        <col_name_string>email_watermark</col_name_string>
+        <index_col_name element="email_watermark" name="x_13231_helpful_em_email_feedback">888d823f2f6218101ba85d492799b672</index_col_name>
+        <logical_table_name>x_13231_helpful_em_email_feedback</logical_table_name>
+        <sys_class_name>sys_index</sys_class_name>
+        <sys_created_by>system</sys_created_by>
+        <sys_created_on>2020-08-18 14:44:56</sys_created_on>
+        <sys_id>a50a4f802fba58101ba85d492799b644</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_13231_helpful_em_email_feedback</sys_name>
+        <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
+        <sys_update_name>sys_index_x_13231_helpful_em_email_feedback_email_watermark</sys_update_name>
+        <sys_updated_by>system</sys_updated_by>
+        <sys_updated_on>2020-08-18 14:44:56</sys_updated_on>
+        <table display_value="Email feedback" name="x_13231_helpful_em_email_feedback">ba32dd232faa94101ba85d492799b628</table>
+        <unique_index>false</unique_index>
+    </sys_index>
+</record_update>

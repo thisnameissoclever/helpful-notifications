@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-08-18 17:36:36</sys_created_on>
+        <sys_id>4c513f8c2f3e58101ba85d492799b6db</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_13231_helpful_em_email_feedback.*.snc_internal</sys_name>
+        <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
+        <sys_security_acl display_value="x_13231_helpful_em_email_feedback.*">c4513f8c2f3e58101ba85d492799b6da</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_4c513f8c2f3e58101ba85d492799b6db</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-18 17:36:36</sys_updated_on>
+        <sys_user_role display_value="snc_internal" name="snc_internal">7fcaa702933002009c8579b4f47ffbde</sys_user_role>
+        <transaction_id>4451f3442fb618101ba85d492799b602</transaction_id>
+    </sys_security_acl_role>
+</record_update>

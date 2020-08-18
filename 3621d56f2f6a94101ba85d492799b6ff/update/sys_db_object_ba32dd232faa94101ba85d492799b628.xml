@@ -25,16 +25,16 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-08-16 16:47:57</sys_created_on>
         <sys_id>ba32dd232faa94101ba85d492799b628</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_name>Email feedback</sys_name>
         <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
         <sys_policy/>
         <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
         <sys_update_name>sys_db_object_ba32dd232faa94101ba85d492799b628</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-08-16 17:03:43</sys_updated_on>
+        <sys_updated_on>2020-08-17 16:27:07</sys_updated_on>
         <update_access>true</update_access>
-        <user_role display_value="x_13231_helpful_em.email_feedback_user" name="x_13231_helpful_em.email_feedback_user">7bf29d632faa94101ba85d492799b613</user_role>
+        <user_role display_value="snc_internal" name="snc_internal">7fcaa702933002009c8579b4f47ffbde</user_role>
         <ws_access>true</ws_access>
     </sys_db_object>
 </record_update>

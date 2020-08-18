@@ -3,23 +3,24 @@
         <active>true</active>
         <admin_overrides>true</admin_overrides>
         <advanced>false</advanced>
-        <condition/>
-        <description>Allow users with the helpful email admin or helpful email user roles to read all email feedback records. </description>
-        <name>x_13231_helpful_em_email_feedback</name>
+        <condition table="x_13231_helpful_em_email_feedback.*">userDYNAMIC90d1921e5f510100a9ad2572f2b477fe^EQ<item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </condition>
+        <description>Allow all internal users to write to the Email feedback table fields, but only for feedback associated with them. </description>
+        <name>x_13231_helpful_em_email_feedback.*</name>
         <operation display_value="read">read</operation>
         <script/>
         <sys_class_name>sys_security_acl</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2020-08-16 16:47:58</sys_created_on>
-        <sys_id>98039d632faa94101ba85d492799b643</sys_id>
-        <sys_mod_count>1</sys_mod_count>
-        <sys_name>x_13231_helpful_em_email_feedback</sys_name>
+        <sys_created_on>2020-08-18 17:36:36</sys_created_on>
+        <sys_id>c4513f8c2f3e58101ba85d492799b6da</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_13231_helpful_em_email_feedback.*</sys_name>
         <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
         <sys_policy/>
         <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
-        <sys_update_name>sys_security_acl_98039d632faa94101ba85d492799b643</sys_update_name>
+        <sys_update_name>sys_security_acl_c4513f8c2f3e58101ba85d492799b6da</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-08-18 17:27:07</sys_updated_on>
+        <sys_updated_on>2020-08-18 17:36:36</sys_updated_on>
         <type display_value="record">record</type>
     </sys_security_acl>
 </record_update>
