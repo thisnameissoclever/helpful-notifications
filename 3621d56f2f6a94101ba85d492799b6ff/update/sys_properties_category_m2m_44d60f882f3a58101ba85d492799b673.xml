@@ -2,7 +2,7 @@
     <sys_properties_category_m2m action="INSERT_OR_UPDATE">
         <category display_value="Email feedback settings">9d2316372fa218101ba85d492799b6d9</category>
         <order>300</order>
-        <property display_value="x_13231_helpful_em.button_text_color" name="x_13231_helpful_em.button_text_color">32a6838c2f7a58101ba85d492799b688</property>
+        <property display_value="x_13231_helpful_em.helpful_button_text_color" name="x_13231_helpful_em.helpful_button_text_color">32a6838c2f7a58101ba85d492799b688</property>
         <sys_class_name>sys_properties_category_m2m</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-08-18 14:30:54</sys_created_on>

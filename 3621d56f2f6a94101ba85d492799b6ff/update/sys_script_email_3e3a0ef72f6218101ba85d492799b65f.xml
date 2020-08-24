@@ -19,18 +19,21 @@
 	function getButtons(email, email_action, helpful) {
 		var notificationID = email_action.getValue('sys_id');
 		var emailWatermark = email.watermark.toString();
-		var buttonBGColor = gs.getProperty('x_13231_helpful_em.button_background_color', '#e9703e');
-		var buttonTextColor = gs.getProperty('x_13231_helpful_em.button_text_color', '#ffffff');
+		var helpfulButtonBGColor = gs.getProperty('x_13231_helpful_em.helpful_button_background_color', '#e9703e');
+		var unhelpfulButtonBGColor = gs.getProperty('x_13231_helpful_em.unhelpful_button_background_color', '#e9703e');
+		var helpfulButtonTextColor = gs.getProperty('x_13231_helpful_em.helpful_button_text_color', '#ffffff');
+		var unhelpfulButtonTextColor = gs.getProperty('x_13231_helpful_em.unhelpful_button_text_color', '#ffffff');
 		var feedbackURL = gs.getProperty('glide.servlet.uri', '') + 'x_13231_helpful_em_email_feedback.do?sys_id=-1&sysparm_query=notification=' + notificationID + '^email_watermark=' + emailWatermark + '^feedback=';
 		
-		//todo: Wow, I REALLY need to get better at HTML/CSS, and re-style this. Or maybe ask Kim. Kim knows what's up.
+		//todo: Wow, I REALLY need to get better at HTML/CSS, and re-style this. 
+		// Or maybe ask Kim. Kim knows what's up.
 		var buttonHTML = '<table width="100%" border="0" cellspacing="0" cellpadding="0">\n' +
 			'  <tr>\n' +
 			'    <td>\n' +
 			'      <table border="0" cellspacing="10" cellpadding="0">\n' +
 			'        <tr>\n' +
-			'          <td align="center" style="border-radius: 3px;" bgcolor="' + buttonBGColor + '"><a href="' + feedbackURL + '1" target="_blank" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; color: ' + buttonTextColor + '; text-decoration: none; text-decoration: none;border-radius: 3px; padding: 12px 18px; border: 1px solid ' + buttonBGColor + '; display: inline-block;">Helpful</a></td>\n' +
-			'          <td align="center" style="border-radius: 3px;" bgcolor="' + buttonBGColor + '"><a href="' + feedbackURL + '-1" target="_blank" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; color: ' + buttonTextColor + '; text-decoration: none; text-decoration: none;border-radius: 3px; padding: 12px 18px; border: 1px solid ' + buttonBGColor + '; display: inline-block;">Not helpful</a></td>\n' +
+			'          <td align="center" style="border-radius: 3px;" bgcolor="' + helpfulButtonBGColor + '"><a href="' + feedbackURL + '1" target="_blank" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; color: ' + helpfulButtonTextColor + '; text-decoration: none; text-decoration: none;border-radius: 3px; padding: 12px 18px; border: 1px solid ' + helpfulButtonBGColor + '; display: inline-block;">Helpful</a></td>\n' +
+			'          <td align="center" style="border-radius: 3px;" bgcolor="' + unhelpfulButtonBGColor + '"><a href="' + feedbackURL + '-1" target="_blank" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; color: ' + unhelpfulButtonTextColor + '; text-decoration: none; text-decoration: none;border-radius: 3px; padding: 12px 18px; border: 1px solid ' + unhelpfulButtonBGColor + '; display: inline-block;">Not helpful</a></td>\n' +
 			'        </tr>\n' +
 			'      </table>\n' +
 			'    </td>\n' +
@@ -41,7 +44,8 @@
 			return buttonHTML;
 		}
 		
-		//If mandatory variables were not found or built for some reason, return false and print nothing.
+		//If mandatory variables were not found or built for some reason, return false and print
+		// nothing.
 		return false;
 	}
 	
@@ -52,13 +56,13 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-08-17 15:28:47</sys_created_on>
         <sys_id>3e3a0ef72f6218101ba85d492799b65f</sys_id>
-        <sys_mod_count>19</sys_mod_count>
+        <sys_mod_count>21</sys_mod_count>
         <sys_name>was_this_email_helpful</sys_name>
         <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
         <sys_policy/>
         <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
         <sys_update_name>sys_script_email_3e3a0ef72f6218101ba85d492799b65f</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-08-18 17:58:55</sys_updated_on>
+        <sys_updated_on>2020-08-24 14:28:28</sys_updated_on>
     </sys_script_email>
 </record_update>
