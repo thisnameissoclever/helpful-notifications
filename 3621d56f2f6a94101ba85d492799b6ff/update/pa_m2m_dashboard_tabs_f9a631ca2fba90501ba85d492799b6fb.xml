@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="pa_m2m_dashboard_tabs">
+    <pa_m2m_dashboard_tabs action="INSERT_OR_UPDATE">
+        <dashboard display_value="Email Feedback Dashboard">e286fd8a2fba90501ba85d492799b61b</dashboard>
+        <home>false</home>
+        <homepage/>
+        <order>1</order>
+        <sys_class_name>pa_m2m_dashboard_tabs</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-08-24 13:48:32</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>f9a631ca2fba90501ba85d492799b6fb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>e286fd8a2fba90501ba85d492799b61b</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
+        <sys_update_name>pa_m2m_dashboard_tabs_f9a631ca2fba90501ba85d492799b6fb</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-24 13:48:32</sys_updated_on>
+        <tab display_value="Email Feedback Dashb - New Tab">75a63d8a2fba90501ba85d492799b642</tab>
+    </pa_m2m_dashboard_tabs>
+</record_update>

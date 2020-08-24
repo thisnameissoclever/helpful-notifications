@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update node_type="sys_portal_page" unload_date="2020-08-24 13:49:30">
+    <sys_portal_page action="INSERT_OR_UPDATE">
+        <layout/>
+        <order/>
+        <read_roles>snc_internal</read_roles>
+        <roles/>
+        <selectable>false</selectable>
+        <sys_class_name>sys_portal_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-08-24 13:48:31</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>21a63d8a2fba90501ba85d492799b63e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>PA Email Feedback Dashb - New Tab</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
+        <sys_update_name>sys_portal_page_21a63d8a2fba90501ba85d492799b63e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-24 13:48:31</sys_updated_on>
+        <title>PA Email Feedback Dashb - New Tab</title>
+        <user/>
+        <view>pa_email_feedback_dashb_-_new_tab</view>
+    </sys_portal_page>
+</record_update>
