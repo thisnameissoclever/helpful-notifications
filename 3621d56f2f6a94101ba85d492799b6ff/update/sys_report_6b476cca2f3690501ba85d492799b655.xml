@@ -53,7 +53,7 @@
         <group/>
         <import_table/>
         <interval>year</interval>
-        <is_published>false</is_published>
+        <is_published>true</is_published>
         <is_real_time>false</is_real_time>
         <is_scheduled>false</is_scheduled>
         <legend_align_columns>true</legend_align_columns>
@@ -76,7 +76,7 @@
         <pivot_expanded>true</pivot_expanded>
         <report_drilldown/>
         <report_source/>
-        <roles/>
+        <roles>public</roles>
         <row>notification</row>
         <sc_groupby_item_id/>
         <sc_groupby_variable_id/>
@@ -104,14 +104,14 @@
         <sys_created_by>rdfed</sys_created_by>
         <sys_created_on>2020-08-24 08:01:51</sys_created_on>
         <sys_id>6b476cca2f3690501ba85d492799b655</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name>Email Feedback HeatMap</sys_name>
         <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
         <sys_policy/>
         <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
         <sys_update_name>sys_report_6b476cca2f3690501ba85d492799b655</sys_update_name>
-        <sys_updated_by>rdfed</sys_updated_by>
-        <sys_updated_on>2020-08-24 08:01:51</sys_updated_on>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-24 13:51:01</sys_updated_on>
         <table>x_13231_helpful_em_email_feedback</table>
         <title>Email Feedback HeatMap</title>
         <title_horizontal_alignment>center</title_horizontal_alignment>
