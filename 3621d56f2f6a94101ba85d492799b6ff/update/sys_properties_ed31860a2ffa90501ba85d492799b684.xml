@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>&lt;p&gt;If set to true, require that the user enter a comment when they've selected negative ("This email was not helpful") feedback.&lt;/p&gt;&#13;
+&lt;strong&gt;Default&lt;/strong&gt;: false</description>
+        <ignore_cache>false</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_13231_helpful_em.require_comment_on_negative_feedback</name>
+        <read_roles/>
+        <suffix>require_comment_on_negative_feedback</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-08-24 14:34:40</sys_created_on>
+        <sys_id>ed31860a2ffa90501ba85d492799b684</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>x_13231_helpful_em.require_comment_on_negative_feedback</sys_name>
+        <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
+        <sys_update_name>sys_properties_ed31860a2ffa90501ba85d492799b684</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-24 15:09:50</sys_updated_on>
+        <type>boolean</type>
+        <value>false</value>
+        <write_roles>x_13231_helpful_em.helpful_emails_admin</write_roles>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=ed31860a2ffa90501ba85d492799b684"/>
+</record_update>
