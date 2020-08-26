@@ -2,7 +2,7 @@
     <pa_tabs action="INSERT_OR_UPDATE">
         <canvas_page display_value="PA Email Feedback Dashb - New Tab">6da63d8a2fba90501ba85d492799b63f</canvas_page>
         <name>Email Feedback Dashb - New Tab</name>
-        <page display_value="PA Email Feedback Dashb - New Tab">21a63d8a2fba90501ba85d492799b63e</page>
+        <page/>
         <sys_class_name>pa_tabs</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-08-24 13:48:32</sys_created_on>

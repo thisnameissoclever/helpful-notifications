@@ -29,14 +29,14 @@
         <reverted_from/>
         <source>d7b9e1122f2210101ba85d492799b63e</source>
         <source_table>sys_upgrade_history</source_table>
-        <state>previous</state>
+        <state>current</state>
         <sys_created_by/>
         <sys_created_on>2020-08-12 21:14:53</sys_created_on>
         <sys_id>c35437442f7e58101ba85d492799b6fc</sys_id>
-        <sys_mod_count/>
+        <sys_mod_count>0</sys_mod_count>
         <sys_recorded_at>173e48698c80000000</sys_recorded_at>
-        <sys_updated_by/>
-        <sys_updated_on/>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-26 21:02:03</sys_updated_on>
         <type>Access Roles</type>
         <update_guid>83543744067e5810a7217ccb4094e9fc</update_guid>
         <update_guid_history>83543744067e5810a7217ccb4094e9fc:-1525398007</update_guid_history>
