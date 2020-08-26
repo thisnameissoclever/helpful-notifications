@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties">
+    <sys_properties action="INSERT_OR_UPDATE">
+        <choices/>
+        <description>&lt;hr /&gt;&#13;
+&lt;p&gt;&lt;strong&gt;Show warning on feedback form when an app update is available&lt;/strong&gt;&lt;/p&gt;&#13;
+&lt;p&gt;If set to true, a warning will be shown on the feedback form when an update to the "Was this email helpful" application is available. &lt;br /&gt;&#13;
+&lt;strong&gt;Note&lt;/strong&gt;: This warning will only be shown to users who have the application admin role.&lt;/p&gt;&#13;
+&lt;strong&gt;Default&lt;/strong&gt;: true (highly recommended!)</description>
+        <ignore_cache>false</ignore_cache>
+        <is_private>false</is_private>
+        <name>x_13231_helpful_em.show_warning_when_app_update_available</name>
+        <read_roles/>
+        <suffix>show_warning_when_app_update_available</suffix>
+        <sys_class_name>sys_properties</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-08-26 20:23:28</sys_created_on>
+        <sys_id>80b3a9722fb294501ba85d492799b6c0</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_13231_helpful_em.show_warning_when_app_update_available</sys_name>
+        <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
+        <sys_update_name>sys_properties_80b3a9722fb294501ba85d492799b6c0</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-26 20:23:28</sys_updated_on>
+        <type>boolean</type>
+        <value>true</value>
+        <write_roles/>
+    </sys_properties>
+    <sys_translated_text action="delete_multiple" query="documentkey=80b3a9722fb294501ba85d492799b6c0"/>
+</record_update>

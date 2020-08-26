@@ -41,6 +41,18 @@
 		'x_13231_helpful_em.require_comment_on_positive_feedback', 'false'
 	);
 	
+	g_scratchpad.app_update_available = gs.getProperty(
+		'x_13231_helpful_em.update_available', 'false'
+	);
+	
+	g_scratchpad.updated_release_json = gs.getProperty(
+		'x_13231_helpful_em.updated_release_json', '{}'
+	);
+	
+	g_scratchpad.show_warning_on_app_update = gs.getProperty(
+		'x_13231_helpful_em.show_warning_when_app_update_available', 'false'
+	);
+	
 })(current, previous);]]></script>
         <sys_class_name>sys_script</sys_class_name>
         <sys_created_by>admin</sys_created_by>
@@ -48,7 +60,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>b92998982ffe58101ba85d492799b66e</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>4</sys_mod_count>
         <sys_name>Load properties into scratchpad</sys_name>
         <sys_overrides/>
         <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
@@ -56,7 +68,7 @@
         <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
         <sys_update_name>sys_script_b92998982ffe58101ba85d492799b66e</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-08-24 14:44:22</sys_updated_on>
+        <sys_updated_on>2020-08-26 20:25:13</sys_updated_on>
         <template/>
         <when>before_display</when>
     </sys_script>
