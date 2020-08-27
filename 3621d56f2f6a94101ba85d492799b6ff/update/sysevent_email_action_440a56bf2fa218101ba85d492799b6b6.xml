@@ -12,7 +12,7 @@
         <default_interval/>
         <description/>
         <digest_from/>
-        <digest_html/>
+        <digest_html><![CDATA[<p>test</p>]]></digest_html>
         <digest_reply_to/>
         <digest_separator_html><![CDATA[<p><br /></p>
 <hr />
@@ -21,7 +21,7 @@
         <digest_subject/>
         <digest_template/>
         <digest_text/>
-        <digestable>false</digestable>
+        <digestable>true</digestable>
         <event_name>antivirus.infected</event_name>
         <event_parm_1>false</event_parm_1>
         <event_parm_2>false</event_parm_2>
@@ -35,7 +35,11 @@
         <item_table/>
         <mandatory>false</mandatory>
         <message/>
-        <message_html><![CDATA[<p>${mail_script:was_this_email_helpful}</p>]]></message_html>
+        <message_html><![CDATA[<p>Incident ${number} has been updated.&nbsp;<br /><span style="font-size: 7pt;">Fields which have been updated are shown below in&nbsp;<strong>bold</strong></span><span style="font-size: 7pt;">.&nbsp;</span></p>
+<p>Priority: ${priority}<br />Assignment group: ${assignment_group}<br /><strong>Assigned to: ${assigned_to}</strong><br /><strong>State: ${state} (was Open)</strong></p>
+<p>Comments and Work notes: <br />${comments_and_work_notes}<br /><br /><br /><br /><br /></p>
+<p><br /></p>
+<p>${mail_script:was_this_email_helpful}</p>]]></message_html>
         <message_list/>
         <message_text/>
         <name>Sample: "was this email helpful"</name>
@@ -57,7 +61,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>440a56bf2fa218101ba85d492799b6b6</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_name>Sample: "was this email helpful"</sys_name>
         <sys_overrides/>
         <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
@@ -65,7 +69,7 @@
         <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
         <sys_update_name>sysevent_email_action_440a56bf2fa218101ba85d492799b6b6</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-08-17 16:38:07</sys_updated_on>
+        <sys_updated_on>2020-08-27 10:23:51</sys_updated_on>
         <sys_version>2</sys_version>
         <template display_value="Unsubscribe and Preferences">7ed0481f3b0b2200c869c2c703efc487</template>
         <type>email</type>
