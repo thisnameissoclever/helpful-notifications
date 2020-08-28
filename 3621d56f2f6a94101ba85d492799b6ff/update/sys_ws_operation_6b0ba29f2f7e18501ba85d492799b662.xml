@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl/>
+        <http_method>GET</http_method>
+        <name>Track email open</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+	
+	var emailWatermark = request.queryParams.email_watermark.toString();
+	var notificationID = request.queryParams.notification_id.toString();
+	var emfu = new x_13231_helpful_em.EmailFeedbackUtil();
+	
+	if (!emailWatermark) {
+		return;
+	}
+	
+	emfu.logReadReceipt(emailWatermark, notificationID);
+	
+})(request, response);]]></operation_script>
+        <operation_uri>/api/x_13231_helpful_em/email_feedback</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/</relative_path>
+        <request_example/>
+        <requires_acl_authorization>false</requires_acl_authorization>
+        <requires_authentication>false</requires_authentication>
+        <requires_snc_internal_role>false</requires_snc_internal_role>
+        <short_description>Embedded by the was_this_email_helpful Mail Script</short_description>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-08-28 14:50:07</sys_created_on>
+        <sys_id>6b0ba29f2f7e18501ba85d492799b662</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Track email open</sys_name>
+        <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
+        <sys_update_name>sys_ws_operation_6b0ba29f2f7e18501ba85d492799b662</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-28 17:35:07</sys_updated_on>
+        <web_service_definition display_value="Email feedback">8cfa229f2f7e18501ba85d492799b6b0</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>

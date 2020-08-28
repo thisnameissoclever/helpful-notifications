@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="" label="Email read receipt" language="en" table="x_13231_helpful_em_email_read_receipt">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element/>
+            <help/>
+            <hint/>
+            <label>Email read receipt</label>
+            <language>en</language>
+            <name>x_13231_helpful_em_email_read_receipt</name>
+            <plural>Email read receipts</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-08-28 15:06:08</sys_created_on>
+            <sys_id>a9cea2d32fbe18501ba85d492799b6c5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Email read receipt</sys_name>
+            <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
+            <sys_update_name>sys_documentation_x_13231_helpful_em_email_read_receipt__en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-08-28 15:06:08</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

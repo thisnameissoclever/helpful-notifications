@@ -12,14 +12,57 @@ EmailFeedbackUtil.prototype = {
 	initialize : function () {
 	},
 	
-	checkForUpdates : function (repo) {
-		//Set default value for repo if argument not specified
-		repo = (typeof repo == 'undefined') ? 'helpful-notifications' : repo;
+	logReadReceipt: function(emailWatermark, notificationID) {
+		if (!emailWatermark) {
+			return false; //Cannot continue without email watermark
+		}
 		
-		var currentReleaseTag = gs.getProperty('x_13231_helpful_em.current_release_tag', '');
-		var propUpdatedReleaseObj = gs.getProperty('x_13231_helpful_em.updated_release_json', '{}');
+		var watermarkID, emailID, grEmail;
+		var grWatermark = new GlideRecord('sys_watermark');
+		var grReadReceipt = new GlideRecord('x_13231_helpful_em_email_read_receipt');
+		
+		if (emailWatermark.indexOf('Ref:') == 0) {
+			//Slice off 'Ref:' prefix on watermark
+			emailWatermark = emailWatermark.slice(4);
+		}
+		if (this._doesReadReceiptExist(emailWatermark)) {
+			return false;
+		}
+		
+		grWatermark.addQuery('number', emailWatermark);
+		grWatermark.setLimit(1);
+		grWatermark.query();
+		if (grWatermark.get()) {
+			watermarkID = grWatermark.getValue('sys_id');
+			emailID = grWatermark.getValue('email');
+		} else {
+			//If we couldn't find the watermark record from the watermark ID, try locating the
+			// email record from the watermark instead.
+			grEmail = this._getEmailByWatermark(emailWatermark);
+			if (grEmail) {
+				emailID = grEmail.getValue('sys_id');
+			}
+		}
+		
+		grReadReceipt.initialize();
+		
+		watermarkID && grReadReceipt.setValue('email_watermark', watermarkID);
+		emailID && grReadReceipt.setValue('email', emailID);
+		grReadReceipt.setValue('notification', notificationID);
+		grReadReceipt.setValue('watermark_string', emailWatermark);
+		
+		return grReadReceipt.insert();
+	},
+	
+	checkForUpdates : function (repo, appPrefix) {
+		//Set default value for repo and appPrefix if argument not specified
+		repo = (typeof repo == 'undefined') ? 'helpful-notifications' : repo;
+		appPrefix = (typeof appPrefix == 'undefined') ? 'x_13231_helpful_em' : appPrefix;
+		
+		var currentReleaseTag = gs.getProperty(appPrefix + '.current_release_tag', '');
+		var propUpdatedReleaseObj = gs.getProperty(appPrefix + '.updated_release_json', '{}');
 		// var propUpdateAvailable = gs.getProperty('x_13231_helpful_em.update_available', 'false').toLowerCase() == 'true';
-		var latestReleaseResponseBody = this._getLatestReleaseJSON(repo);
+		var latestReleaseResponseBody = this._getLatestReleaseJSON(repo, appPrefix);
 		var latestReleaseData = {
 			'name' : latestReleaseResponseBody.name.toString(),
 			'tag' : latestReleaseResponseBody.tag_name.toString(),
@@ -34,7 +77,7 @@ EmailFeedbackUtil.prototype = {
 		//If we couldn't get the latest release tag, something has gone wrong.
 		// Log an error, but then return false as though no update is available.
 		if (!latestReleaseData.tag) {
-			this._clearLatestReleaseData();
+			this._clearLatestReleaseData(appPrefix);
 			gs.error('EmailFeedbackUtil.checkForUpdates() has encountered an error. Unable to retrieve latest release tag for repo ' + repo + '.');
 			return false;
 		}
@@ -61,32 +104,62 @@ EmailFeedbackUtil.prototype = {
 		
 		//If API call was successful but no update was found, then we have the most current version.
 		// Ensure that latest release data is cleared out
-		this._clearLatestReleaseData();
+		this._clearLatestReleaseData(appPrefix);
 		return false;
 	},
 	
-	_clearLatestReleaseData: function() {
-		var updateAvailable = gs.getProperty('x_13231_helpful_em.update_available', 'false');
-		var updatedRelease = gs.getProperty('x_13231_helpful_em.updated_release_json', '{}');
+	/* PRIVATE HELPER FUNCTIONS BELOW */
+	
+	_doesReadReceiptExist: function(emailWatermark) {
+		var grReadReceipt = new GlideRecord('x_13231_helpful_em_email_read_receipt');
+		grReadReceipt.addQuery('watermark_string', emailWatermark);
+		grReadReceipt.setLimit(1);
+		grReadReceipt.query();
+		return grReadReceipt.hasNext();
+	},
+	
+	_getEmailByWatermark: function(emailWatermark) {
+		var grEmail = new GlideRecord('sys_email');
+		grEmail.addQuery('body', 'CONTAINS', emailWatermark);
+		grEmail.setLimit(1);
+		grEmail.query();
+		
+		if (grEmail.next()) {
+			return grEmail;
+		}
+		
+		return false;
+	},
+	
+	_clearLatestReleaseData: function(appPrefix) {
+		//Set default value for appPrefix if argument not specified
+		appPrefix = (typeof appPrefix == 'undefined') ? 'x_13231_helpful_em' : appPrefix;
+		
+		var updateAvailable = gs.getProperty(appPrefix + '.update_available', 'false');
+		var updatedRelease = gs.getProperty(appPrefix + '.updated_release_json', '{}');
 		
 		//To avoid an unnecessary system cache flush, only update properties when actually necessary.
 		if (updateAvailable != 'false') {
-			gs.setProperty('x_13231_helpful_em.update_available', 'false');
+			gs.setProperty(appPrefix + '.update_available', 'false');
 		}
 		
 		if (updatedRelease != '{}') {
-			gs.setProperty('x_13231_helpful_em.updated_release_json', '{}');
+			gs.setProperty(appPrefix + '.updated_release_json', '{}');
 		}
 	},
 	
-	_storeLatestReleaseData : function (latestReleaseData) {
-		gs.setProperty('x_13231_helpful_em.update_available', 'true');
-		gs.setProperty('x_13231_helpful_em.updated_release_json', JSON.stringify(latestReleaseData));
+	_storeLatestReleaseData : function (latestReleaseData, appPrefix) {
+		//Set default value for appPrefix if argument not specified
+		appPrefix = (typeof appPrefix == 'undefined') ? 'x_13231_helpful_em' : appPrefix;
+		
+		gs.setProperty(appPrefix + '.update_available', 'true');
+		gs.setProperty(appPrefix + '.updated_release_json', JSON.stringify(latestReleaseData));
 	},
 	
-	_getLatestReleaseJSON : function (repo) {
-		//Set default value for repo if argument not specified
+	_getLatestReleaseJSON : function (repo, appPrefix) {
+		//Set default value for repo and appPrefix if argument not specified
 		repo = (typeof repo == 'undefined') ? 'helpful-notifications' : repo;
+		appPrefix = (typeof appPrefix == 'undefined') ? 'x_13231_helpful_em' : appPrefix;
 		
 		var responseLatestRelease, latestReleaseBody, httpStatus;
 		var rLatestRelease = new sn_ws.RESTMessageV2(
@@ -112,13 +185,13 @@ EmailFeedbackUtil.prototype = {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-08-26 19:18:22</sys_created_on>
         <sys_id>b25d60322fbe54501ba85d492799b6a3</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>19</sys_mod_count>
         <sys_name>EmailFeedbackUtil</sys_name>
         <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
         <sys_update_name>sys_script_include_b25d60322fbe54501ba85d492799b6a3</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-08-26 20:16:28</sys_updated_on>
+        <sys_updated_on>2020-08-28 17:45:52</sys_updated_on>
     </sys_script_include>
 </record_update>
