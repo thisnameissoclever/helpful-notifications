@@ -12,27 +12,58 @@ EmailFeedbackUtil.prototype = {
 	initialize : function () {
 	},
 	
-	logReadReceipt: function(emailWatermark, notificationID) {
+	createFalseReadReceiptFromEmail : function (grEmail) {
+		/*
+			We should always have the email.
+			We should very often be able to get the notification ID (but possibly not always)
+			We will sometimes be able to get the email watermark (but definitely not always)
+		*/
+		
+		if (!grEmail) {
+			//This should never happen. This method is called from a BR *ON* the sys_email table,
+			// so it should always have the email (current in the BR context).
+			gs.warn('EmailFeedbackUtil.createFalseReadReceipt() called with falsey email ' +
+				'record. Unable to create read receipt record.');
+			return false;
+		}
+		var emailID = grEmail.getValue('sys_id');
+		var grWatermark = this._getWatermarkFromEmail(grEmail);
+		var watermarkID = grWatermark && grWatermark.getValue('sys_id');
+		var watermarkNumber = grWatermark && grWatermark.getValue('number');
+		var notificationID = this._getNotificationIDFromEmail(grEmail);
+		var grReadReceipt = new GlideRecord('x_13231_helpful_em_email_read_receipt');
+		
+		if (this._getReadReceiptIfExists(watermarkNumber, emailID)) {
+			return false; //If a read receipt already exists for this email, do nothing.
+		}
+		
+		grReadReceipt.initialize();
+		grReadReceipt.setValue('email_opened', false);
+		//Set the values on the read receipt
+		emailID && grReadReceipt.setValue('email', emailID);
+		watermarkID && grReadReceipt.setValue('email_watermark', watermarkID);
+		watermarkNumber && grReadReceipt.setValue('watermark_string', watermarkNumber);
+		notificationID && grReadReceipt.setValue('notification', notificationID);
+		
+		grReadReceipt.insert();
+		
+		return grReadReceipt;
+	},
+	
+	logReadReceipt : function (emailWatermark, notificationID) {
 		if (!emailWatermark) {
 			return false; //Cannot continue without email watermark
 		}
 		
-		var watermarkID, emailID, grEmail;
-		var grWatermark = new GlideRecord('sys_watermark');
-		var grReadReceipt = new GlideRecord('x_13231_helpful_em_email_read_receipt');
+		var watermarkID, emailID, grEmail, grReadReceipt, grWatermark;
 		
 		if (emailWatermark.indexOf('Ref:') == 0) {
-			//Slice off 'Ref:' prefix on watermark
+			//Slice off 'Ref:' prefix from watermark number
 			emailWatermark = emailWatermark.slice(4);
 		}
-		if (this._doesReadReceiptExist(emailWatermark)) {
-			return false;
-		}
+		grWatermark = this._getWatermarkByNumber(emailWatermark);
 		
-		grWatermark.addQuery('number', emailWatermark);
-		grWatermark.setLimit(1);
-		grWatermark.query();
-		if (grWatermark.get()) {
+		if (grWatermark) {
 			watermarkID = grWatermark.getValue('sys_id');
 			emailID = grWatermark.getValue('email');
 		} else {
@@ -44,14 +75,24 @@ EmailFeedbackUtil.prototype = {
 			}
 		}
 		
-		grReadReceipt.initialize();
+		grReadReceipt = this._getReadReceiptIfExists(emailWatermark, emailID);
+		if (!grReadReceipt) {
+			/*Read receipt record was not created for this email/watermark for some reason.
+			 Therefore, we cannot update it to indicate that this email was read.
+			Creating a new receipt record at this point would skew our metrics, since if we only
+			 create them on read, we would only have receipts where read=true for that case.*/
+			return false;
+		}
 		
 		watermarkID && grReadReceipt.setValue('email_watermark', watermarkID);
 		emailID && grReadReceipt.setValue('email', emailID);
-		grReadReceipt.setValue('notification', notificationID);
-		grReadReceipt.setValue('watermark_string', emailWatermark);
+		notificationID && grReadReceipt.setValue('notification', notificationID);
+		emailWatermark && grReadReceipt.setValue('watermark_string', emailWatermark);
+		grReadReceipt.setValue('email_opened', true);
 		
-		return grReadReceipt.insert();
+		grReadReceipt.update();
+		
+		return grReadReceipt;
 	},
 	
 	checkForUpdates : function (repo, appPrefix) {
@@ -61,7 +102,8 @@ EmailFeedbackUtil.prototype = {
 		
 		var currentReleaseTag = gs.getProperty(appPrefix + '.current_release_tag', '');
 		var propUpdatedReleaseObj = gs.getProperty(appPrefix + '.updated_release_json', '{}');
-		// var propUpdateAvailable = gs.getProperty('x_13231_helpful_em.update_available', 'false').toLowerCase() == 'true';
+		// var propUpdateAvailable = gs.getProperty('x_13231_helpful_em.update_available',
+		// 'false').toLowerCase() == 'true';
 		var latestReleaseResponseBody = this._getLatestReleaseJSON(repo, appPrefix);
 		var latestReleaseData = {
 			'name' : latestReleaseResponseBody.name.toString(),
@@ -70,7 +112,8 @@ EmailFeedbackUtil.prototype = {
 		};
 		
 		if (propUpdatedReleaseObj) {
-			//If updated release object exists, parse it as JSON. This step is necessary because JSON.parse() throws a hard error if you pass it something that isn't an object.
+			//If updated release object exists, parse it as JSON. This step is necessary because
+			// JSON.parse() throws a hard error if you pass it something that isn't an object.
 			propUpdatedReleaseObj = JSON.parse(propUpdatedReleaseObj);
 		}
 		
@@ -110,15 +153,102 @@ EmailFeedbackUtil.prototype = {
 	
 	/* PRIVATE HELPER FUNCTIONS BELOW */
 	
-	_doesReadReceiptExist: function(emailWatermark) {
-		var grReadReceipt = new GlideRecord('x_13231_helpful_em_email_read_receipt');
-		grReadReceipt.addQuery('watermark_string', emailWatermark);
-		grReadReceipt.setLimit(1);
-		grReadReceipt.query();
-		return grReadReceipt.hasNext();
+	_getWatermarkByNumber : function (emailWatermark) {
+		var grWatermark = new GlideRecord('x_13231_helpful_em_email_read_receipt');
+		grWatermark.addQuery('number', emailWatermark);
+		grWatermark.setLimit(1);
+		grWatermark.query();
+		if (grWatermark.get()) {
+			return grWatermark;
+		}
+		return false;
 	},
 	
-	_getEmailByWatermark: function(emailWatermark) {
+	_getWatermarkFromEmail : function (grEmail) {
+		var emailID = grEmail.getValue('sys_id');
+		var grWatermark = new GlideRecord('sys_watermark');
+		grWatermark.addQuery('email', emailID);
+		grWatermark.setLimit(1);
+		grWatermark.query();
+		if (grWatermark.next()) {
+			return grWatermark;
+		}
+		return false; //Return false if watermark record not found
+	},
+	
+	_getNotificationIDFromEmail : function (grEmail) {
+		var notificationID;
+		var emailID = grEmail.getValue('sys_id');
+		var grEmailLog = new GlideRecord('sys_email_log');
+		grEmailLog.addQuery('email', emailID);
+		grEmailLog.setLimit(1);
+		grEmailLog.query();
+		if (grEmailLog.next()) {
+			notificationID = grEmailLog.getValue('notification');
+			if (notificationID) {
+				return notificationID;
+			}
+		}
+		return false; //Return false if email log record not found
+	},
+	
+	/**
+	 * Queries the Email Read Receipt table, looking for a read receipt which corresponds to either
+	 * the specified watermark, or specified sys_email ID. Either the watermark number or email ID
+	 * MUST be specified. If both are specified, we'll search by both. If neither are specified,
+	 * this will not work.
+	 *
+	 * @param {string} [emailWatermark=] - The email watermark, as a string, to get the read
+	 *     receipt for. Should NOT begin with "Ref:".
+	 * @param {string} [emailID] - The sys_id of the sys_email record to get the read receipt for.
+	 * @param {boolean} [emailOpened] - If specified, will only return read receipt records for
+	 *     emails which have (or have not) been opened, depending on whether the specified value is
+	 *     true or false. If this argument is not specified, then any read receipt record will be
+	 *     returned (if found), regardless of whether the email has been read or not.
+	 * @returns {GlideRecord|boolean} - If a read receipt record exists for the specified email
+	 *     watermark or email ID, returns the GlideRecord for that read receipt. If neither
+	 *     argument is specified, or a read receipt could not be found, then this method will
+	 *     return false.
+	 * @private
+	 */
+	_getReadReceiptIfExists : function (emailWatermark, emailID, emailOpened) {
+		if (!emailWatermark && !emailID) {
+			//Either watermark or email ID MUST be specified, or we cannot continue.
+			return false;
+		}
+		
+		var grReadReceipt = new GlideRecord('x_13231_helpful_em_email_read_receipt');
+		
+		//BUILD READ RECEIPT QUERY
+		if (emailWatermark && emailID) {
+			//If watermark AND email ID are specified
+			grReadReceipt.addQuery('watermark_string', emailWatermark)
+				.addOrCondition('email', emailID);
+		} else if (emailWatermark) {
+			//If JUST watermark is specified
+			grReadReceipt.addQuery('watermark_string', emailWatermark);
+		} else if (emailID) {
+			//if JUST email ID is specified
+			grReadReceipt.addQuery('email', emailID);
+		}
+		
+		//Add conditions only if emailOpened IS specified, and is STRICTLY equal to true or false
+		if (emailOpened === true) {
+			grReadReceipt.addQuery('email_opened', true);
+		} else if (emailOpened === false) {
+			grReadReceipt.addQuery('email_opened', false);
+		}
+		
+		grReadReceipt.setLimit(1);
+		grReadReceipt.query();
+		if (grReadReceipt.next()) {
+			return grReadReceipt;
+		}
+		
+		return false;
+	},
+	
+	_getEmailByWatermark : function (emailWatermark) {
 		var grEmail = new GlideRecord('sys_email');
 		grEmail.addQuery('body', 'CONTAINS', emailWatermark);
 		grEmail.setLimit(1);
@@ -131,14 +261,15 @@ EmailFeedbackUtil.prototype = {
 		return false;
 	},
 	
-	_clearLatestReleaseData: function(appPrefix) {
+	_clearLatestReleaseData : function (appPrefix) {
 		//Set default value for appPrefix if argument not specified
 		appPrefix = (typeof appPrefix == 'undefined') ? 'x_13231_helpful_em' : appPrefix;
 		
 		var updateAvailable = gs.getProperty(appPrefix + '.update_available', 'false');
 		var updatedRelease = gs.getProperty(appPrefix + '.updated_release_json', '{}');
 		
-		//To avoid an unnecessary system cache flush, only update properties when actually necessary.
+		//To avoid an unnecessary system cache flush, only update properties when actually
+		// necessary.
 		if (updateAvailable != 'false') {
 			gs.setProperty(appPrefix + '.update_available', 'false');
 		}
@@ -185,13 +316,13 @@ EmailFeedbackUtil.prototype = {
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-08-26 19:18:22</sys_created_on>
         <sys_id>b25d60322fbe54501ba85d492799b6a3</sys_id>
-        <sys_mod_count>19</sys_mod_count>
+        <sys_mod_count>20</sys_mod_count>
         <sys_name>EmailFeedbackUtil</sys_name>
         <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
         <sys_update_name>sys_script_include_b25d60322fbe54501ba85d492799b6a3</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-08-28 17:45:52</sys_updated_on>
+        <sys_updated_on>2020-08-31 19:56:04</sys_updated_on>
     </sys_script_include>
 </record_update>

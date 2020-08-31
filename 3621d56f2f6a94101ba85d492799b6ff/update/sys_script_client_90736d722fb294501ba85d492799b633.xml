@@ -11,14 +11,34 @@
         <name>Show warning when app update available</name>
         <order/>
         <script><![CDATA[function onLoad() {
+	showWarningIfUpdateAvailable();
+	showWarningIfPAUpdateAvailble();
+}
+
+function showWarningIfUpdateAvailable() {
 	var userIsAppAdmin = g_user.hasRole('x_13231_helpful_em.helpful_emails_admin');
-	var updateIsAvailable = g_scratchpad.app_update_available == 'true';
 	var showWarningOnUpdate = g_scratchpad.show_warning_on_app_update == 'true';
+	var updateIsAvailable = g_scratchpad.app_update_available == 'true';
 	var updatedReleaseJSON = g_scratchpad.updated_release_json ? JSON.parse(g_scratchpad.updated_release_json) : {};
 	
 	if (updateIsAvailable && userIsAppAdmin && showWarningOnUpdate && updatedReleaseJSON) {
 		g_form.addErrorMessage(
 			'An update to the "Was this email helpful" application is available. The latest version (' +
+			updatedReleaseJSON.name + ') can be downloaded <a href="' + updatedReleaseJSON.url +
+			'" target="_blank">here</a>.'
+		);
+	}
+}
+
+function showWarningIfPAUpdateAvailble() {
+	var userIsAppAdmin = g_user.hasRole('x_13231_helpful_em.helpful_emails_admin');
+	var showWarningOnUpdate = g_scratchpad.show_warning_on_app_update == 'true';
+	var updateIsAvailable = g_scratchpad.pa_app_update_available == 'true';
+	var updatedReleaseJSON = g_scratchpad.pa_updated_release_json ? JSON.parse(g_scratchpad.pa_updated_release_json) : {};
+	
+	if (updateIsAvailable && userIsAppAdmin && showWarningOnUpdate && updatedReleaseJSON) {
+		g_form.addErrorMessage(
+			'An update to the "Was this email helpful - PA PAck" application is available. The latest version (' +
 			updatedReleaseJSON.name + ') can be downloaded <a href="' + updatedReleaseJSON.url +
 			'" target="_blank">here</a>.'
 		);
@@ -30,7 +50,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>90736d722fb294501ba85d492799b633</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>3</sys_mod_count>
         <sys_name>Show warning when app update available</sys_name>
         <sys_overrides/>
         <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
@@ -38,7 +58,7 @@
         <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
         <sys_update_name>sys_script_client_90736d722fb294501ba85d492799b633</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-08-26 20:39:01</sys_updated_on>
+        <sys_updated_on>2020-08-31 16:25:51</sys_updated_on>
         <table>x_13231_helpful_em_email_feedback</table>
         <type>onLoad</type>
         <ui_type>10</ui_type>
