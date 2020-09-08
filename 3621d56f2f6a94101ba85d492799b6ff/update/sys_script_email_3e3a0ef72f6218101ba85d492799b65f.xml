@@ -3,78 +3,121 @@
         <name>was_this_email_helpful</name>
         <new_lines_to_html>false</new_lines_to_html>
         <script><![CDATA[(function runMailScript( /* GlideRecord */ current, /* TemplatePrinter */ template, /* Optional EmailOutbound */ email, /* Optional GlideRecord */ email_action, /* Optional GlideRecord */ event) {
-	var buttonsHTML = getButtons(email, email_action, true);
-	if (buttonsHTML) {
-		template.print(buttonsHTML);
-	}
-
-
-	/* HELPER FUNCTIONS BELOW */
-	function getButtons(email, email_action, helpful) {
-		var row = '<tr>';
-		var table = '<table border="0" cellspacing="0" cellpadding="0">';
-		var rowEnd = '</tr>';
-		var tableEnd = '</table>';
-		
-		var notificationID = email_action.getValue('sys_id');
-		var emailWatermark = email.watermark.toString();
-
-		var feedbackURL = gs.getProperty('glide.servlet.uri', '') + 
-			'x_13231_helpful_em_email_feedback.do?sys_id=-1&sysparm_query=notification=' + notificationID + 
-			'^email_watermark=' + emailWatermark + '^feedback=';
-
-		var feedbackButtonIMG = '<img src="' + gs.getProperty('glide.servlet.uri', '') +
-			'api/x_13231_helpful_em/email_feedback?email_watermark=' + emailWatermark + 
-			'&notification_id=' + notificationID + '" width="1" height="1" />';
-
-		var questionText = gs.getProperty('x_13231_helpful_em.question_text', 'Was this email helpful?');
-		var questionTextHTML = '<td colspan="3">';
-		questionTextHTML += '<h3>' + questionText + '</h3></td>';
-		
-		var helpfulButtonText = gs.getProperty('x_13231_helpful_em.helpful_button_text', 'Helpful');
-		var unhelpfulButtonText = gs.getProperty('x_13231_helpful_em.unhelpful_button_text', 'Not Helpful');
-
-		var helpfulButtonBGColor = gs.getProperty('x_13231_helpful_em.helpful_button_background_color', '#e9703e');
-		var unhelpfulButtonBGColor = gs.getProperty('x_13231_helpful_em.unhelpful_button_background_color', '#e9703e');
-
-		var helpfulButtonTextColor = gs.getProperty('x_13231_helpful_em.helpful_button_text_color', '#ffffff');
-		var unhelpfulButtonTextColor = gs.getProperty('x_13231_helpful_em.unhelpful_button_text_color', '#ffffff');
-
-		var helpfulButton = getButtonHTML(helpfulButtonText, helpfulButtonTextColor, helpfulButtonBGColor, feedbackURL + '1');
-		var unhelpfulButton = getButtonHTML(unhelpfulButtonText, unhelpfulButtonTextColor, unhelpfulButtonBGColor, feedbackURL + '-1');
-		
-		var buttonHTML = table + row + questionTextHTML + rowEnd;
-		buttonHTML += row + helpfulButton + '<td width="10px"></td>' + unhelpfulButton + rowEnd + tableEnd;
-		buttonHTML += feedbackButtonIMG;
-
-		if (notificationID && feedbackURL) {
-			return buttonHTML;
+		var buttonsHTML = getButtons(email, email_action, true);
+		if (buttonsHTML) {
+			template.print(buttonsHTML);
 		}
-
-		//If mandatory variables were not found or built for some reason, return false and print
-		// nothing.
-		return false;
+		
+		
+		/* HELPER FUNCTIONS BELOW */
+		function getButtons(email, email_action, helpful) {
+			var row = '<tr>';
+			var table = '<table border="0" cellspacing="0" cellpadding="0">';
+			var rowEnd = '</tr>';
+			var tableEnd = '</table>';
+			
+			var notificationID = email_action.getValue('sys_id');
+			var emailWatermark = email.watermark.toString();
+			
+			var positiveFeedbackURL = getButtonURL(email_action, notificationID, emailWatermark, true);
+			/*gs.getProperty('glide.servlet.uri', '') +
+				'x_13231_helpful_em_email_feedback.do?sys_id=-1&sysparm_query=notification=' + notificationID +
+				'^email_watermark=' + emailWatermark + '^feedback=1';*/
+			var negativeFeedbackURL = getButtonURL(email_action, notificationID, emailWatermark, false);
+			/*gs.getProperty('glide.servlet.uri', '') +
+				'x_13231_helpful_em_email_feedback.do?sys_id=-1&sysparm_query=notification=' + notificationID +
+				'^email_watermark=' + emailWatermark + '^feedback=-1';*/
+			
+			var feedbackButtonIMG = '<img src="' + gs.getProperty('glide.servlet.uri', '') +
+				'api/x_13231_helpful_em/email_feedback?email_watermark=' + emailWatermark +
+				'&notification_id=' + notificationID + '" width="1" height="1" />';
+			
+			var questionText = gs.getProperty('x_13231_helpful_em.question_text', 'Was this email helpful?');
+			var questionTextHTML = '<td colspan="3">';
+			questionTextHTML += '<h3>' + questionText + '</h3></td>';
+			
+			var helpfulButtonText = gs.getProperty('x_13231_helpful_em.helpful_button_text', 'Helpful');
+			var unhelpfulButtonText = gs.getProperty('x_13231_helpful_em.unhelpful_button_text', 'Not Helpful');
+			
+			var helpfulButtonBGColor = gs.getProperty('x_13231_helpful_em.helpful_button_background_color', '#e9703e');
+			var unhelpfulButtonBGColor = gs.getProperty('x_13231_helpful_em.unhelpful_button_background_color', '#e9703e');
+			
+			var helpfulButtonTextColor = gs.getProperty('x_13231_helpful_em.helpful_button_text_color', '#ffffff');
+			var unhelpfulButtonTextColor = gs.getProperty('x_13231_helpful_em.unhelpful_button_text_color', '#ffffff');
+			
+			var helpfulButton = getButtonHTML(
+				helpfulButtonText,
+				helpfulButtonTextColor,
+				helpfulButtonBGColor,
+				positiveFeedbackURL
+			);
+			var unhelpfulButton = getButtonHTML(
+				unhelpfulButtonText,
+				unhelpfulButtonTextColor,
+				unhelpfulButtonBGColor,
+				negativeFeedbackURL
+			);
+			
+			var buttonHTML = table + row + questionTextHTML + rowEnd;
+			buttonHTML += row + helpfulButton + '<td width="10px"></td>' + unhelpfulButton + rowEnd + tableEnd;
+			buttonHTML += feedbackButtonIMG;
+			
+			if (notificationID && positiveFeedbackURL && negativeFeedbackURL) {
+				return buttonHTML;
+			}
+			
+			//If mandatory variables were not found or built for some reason, return false and print
+			// nothing.
+			return false;
+		}
+		
+		function getButtonURL(email_action, notificationID, emailWatermark, helpful) {
+			var buttonURL;
+			var targetEmailAddress = email_action.getValue('from');
+			var useMailtoButtons = (gs.getProperty(
+				'x_13231_helpful_em.use_mailto_buttons',
+				'false'
+			) == 'true'); //todo: Use this to change how the button works
+			
+			if (useMailtoButtons && targetEmailAddress) {
+				//todo: Log a warning if useMailtoButton is true but targetEmailAddress is falsey
+				buttonURL = 'mailto:' + targetEmailAddress + '?subject=WtEH%20-%20Feedback' +
+					'&body=Enter%20your%20comment%20here%3A%0D%0A%0D%0A%0D%0A' +
+					'----DO%20NOT%20MODIFY%20ANYTHING%20BELOW%20THIS%20LINE----' +
+					'%0D%0Awatermark%3A' + emailWatermark +
+					'%0D%0Anotification_id%3A' + notificationID +
+					'%0D%0Afeedback%3A' + (helpful ? '1' : '-1');
+			} else {
+				buttonURL = gs.getProperty('glide.servlet.uri', '') +
+					'x_13231_helpful_em_email_feedback.do?sys_id=-1&sysparm_query=notification=' +
+					notificationID + '^email_watermark=' + emailWatermark + '^feedback=';
+				buttonURL += (helpful ? '1' : '-1');
+				
+				return buttonURL;
+			}
+		}
+		
+		function getButtonHTML(text, color, buttonColor, url) {
+			var button = '<td align="center" style="border-radius: 3px; background-color:' + buttonColor + ';">';
+			button += '<a href="' + url + '" target="_blank" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: ' + color + '; text-decoration: none; text-decoration: none;border-radius: 3px; padding: 10px 18px; border: 1px solid ' + buttonColor + '; display: inline-block;">' + text + '</a>';
+			button += '</td>';
+			return button;
+		}
+		
 	}
 
-	function getButtonHTML(text, color, buttonColor, url) {
-		var button = '<td align="center" style="border-radius: 3px; background-color:' + buttonColor + ';">';
-		button += '<a href="' + url + '" target="_blank" style="font-size: 16px; font-family: Helvetica, Arial, sans-serif; font-weight: bold; color: ' + color + '; text-decoration: none; text-decoration: none;border-radius: 3px; padding: 10px 18px; border: 1px solid ' + buttonColor + '; display: inline-block;">' + text + '</a>';
-		button += '</td>';
-		return button;
-	}
-
-})(current, template, email, email_action, event);]]></script>
+)(current, template, email, email_action, event);]]></script>
         <sys_class_name>sys_script_email</sys_class_name>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2020-08-17 15:28:47</sys_created_on>
         <sys_id>3e3a0ef72f6218101ba85d492799b65f</sys_id>
-        <sys_mod_count>53</sys_mod_count>
+        <sys_mod_count>54</sys_mod_count>
         <sys_name>was_this_email_helpful</sys_name>
         <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
         <sys_policy/>
         <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
         <sys_update_name>sys_script_email_3e3a0ef72f6218101ba85d492799b65f</sys_update_name>
-        <sys_updated_by>keebkeeb</sys_updated_by>
-        <sys_updated_on>2020-08-31 02:00:53</sys_updated_on>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-09-08 16:08:58</sys_updated_on>
     </sys_script_email>
 </record_update>

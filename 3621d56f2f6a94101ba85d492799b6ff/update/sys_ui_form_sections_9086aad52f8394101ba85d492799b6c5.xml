@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_form_sections form_id="9086aad52f8394101ba85d492799b6c5" sys_domain="global" table="sn_cmp_rsrc_opr_cat_item" version="3">
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>0</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-09-03 19:37:51</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>dc86aad52f8394101ba85d492799b6e2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="sn_cmp_rsrc_opr_cat_item" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">9086aad52f8394101ba85d492799b6c5</sys_ui_form>
+            <sys_ui_section caption="NULL" display_value="" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">9886aad52f8394101ba85d492799b6cf</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-09-03 19:37:51</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>1</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-09-03 19:37:51</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>ac86aad52f8394101ba85d492799b6f7</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="sn_cmp_rsrc_opr_cat_item" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">9086aad52f8394101ba85d492799b6c5</sys_ui_form>
+            <sys_ui_section caption="Item Details" display_value="Item Details" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">a086aad52f8394101ba85d492799b6f3</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-09-03 19:37:51</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>2</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-09-03 19:37:51</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>e086aad52f8394101ba85d492799b6e8</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="sn_cmp_rsrc_opr_cat_item" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">9086aad52f8394101ba85d492799b6c5</sys_ui_form>
+            <sys_ui_section caption="Process Engine" display_value="Process Engine" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">d486aad52f8394101ba85d492799b6e3</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-09-03 19:37:51</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>3</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-09-03 19:37:51</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>2086aad52f8394101ba85d492799b6ed</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="sn_cmp_rsrc_opr_cat_item" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">9086aad52f8394101ba85d492799b6c5</sys_ui_form>
+            <sys_ui_section caption="Picture" display_value="Picture" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">e886aad52f8394101ba85d492799b6e8</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-09-03 19:37:51</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>4</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-09-03 19:37:51</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>a886aad52f8394101ba85d492799b6f2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="sn_cmp_rsrc_opr_cat_item" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">9086aad52f8394101ba85d492799b6c5</sys_ui_form>
+            <sys_ui_section caption="Pricing" display_value="Pricing" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">2886aad52f8394101ba85d492799b6ed</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-09-03 19:37:51</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form_section action="INSERT_OR_UPDATE">
+            <position>5</position>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-09-03 19:37:51</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>9086aad52f8394101ba85d492799b6cf</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_overrides/>
+            <sys_ui_form display_value="sn_cmp_rsrc_opr_cat_item" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">9086aad52f8394101ba85d492799b6c5</sys_ui_form>
+            <sys_ui_section caption="Portal Settings" display_value="Portal Settings" name="sn_cmp_rsrc_opr_cat_item" sys_domain="global" view="Default view">5486aad52f8394101ba85d492799b6c7</sys_ui_section>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-09-03 19:37:51</sys_updated_on>
+        </sys_ui_form_section>
+        <sys_ui_form action="INSERT_OR_UPDATE">
+            <name>sn_cmp_rsrc_opr_cat_item</name>
+            <roles/>
+            <sys_class_name>sys_ui_form</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2020-09-03 19:37:51</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>9086aad52f8394101ba85d492799b6c5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>sn_cmp_rsrc_opr_cat_item</sys_name>
+            <sys_overrides/>
+            <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
+            <sys_update_name>sys_ui_form_sections_9086aad52f8394101ba85d492799b6c5</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2020-09-03 19:37:51</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_form>
+    </sys_ui_form_sections>
+</record_update>

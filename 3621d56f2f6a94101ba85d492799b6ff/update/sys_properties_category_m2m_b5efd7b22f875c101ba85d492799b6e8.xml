@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties_category_m2m">
     <sys_properties_category_m2m action="INSERT_OR_UPDATE">
         <category display_value="Email feedback settings">9d2316372fa218101ba85d492799b6d9</category>
-        <order>1100</order>
-        <property display_value="x_13231_helpful_em.require_comment_on_negative_feedback" name="x_13231_helpful_em.require_comment_on_negative_feedback">ed31860a2ffa90501ba85d492799b684</property>
+        <order>1200</order>
+        <property display_value="x_13231_helpful_em.use_mailto_buttons" name="x_13231_helpful_em.use_mailto_buttons">34fd53fa2f475c101ba85d492799b62b</property>
         <sys_class_name>sys_properties_category_m2m</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2020-08-24 14:34:57</sys_created_on>
-        <sys_id>ed41424a2ffa90501ba85d492799b6d0</sys_id>
-        <sys_mod_count>4</sys_mod_count>
-        <sys_name>x_13231_helpful_em.require_comment_on_negative_feedback.Email feedback settings</sys_name>
+        <sys_created_on>2020-09-08 15:39:30</sys_created_on>
+        <sys_id>b5efd7b22f875c101ba85d492799b6e8</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>x_13231_helpful_em.use_mailto_buttons.Email feedback settings</sys_name>
         <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
         <sys_policy/>
         <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
-        <sys_update_name>sys_properties_category_m2m_ed41424a2ffa90501ba85d492799b6d0</sys_update_name>
+        <sys_update_name>sys_properties_category_m2m_b5efd7b22f875c101ba85d492799b6e8</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-09-08 15:40:20</sys_updated_on>
+        <sys_updated_on>2020-09-08 15:40:23</sys_updated_on>
     </sys_properties_category_m2m>
 </record_update>

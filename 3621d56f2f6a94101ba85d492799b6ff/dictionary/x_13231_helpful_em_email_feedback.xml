@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element attributes="live_feed=true" label="Email feedback" max_length="40" name="x_13231_helpful_em_email_feedback" sizeclass="1584" type="collection">
+    <element attributes="live_feed=true" label="Email feedback" max_length="40" name="x_13231_helpful_em_email_feedback" sizeclass="2515" type="collection">
         <element label="Comments" max_length="4000" name="comments" type="string"/>
         <element label="Email watermark" max_length="40" name="email_watermark" type="string"/>
         <element attributes="edge_encryption_enabled=true" choice="1" label="Feedback" mandatory="true" max_length="40" name="feedback" type="integer">
