@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sysevent_in_email_action">
+    <sysevent_in_email_action action="INSERT_OR_UPDATE">
+        <action>record_action</action>
+        <active>true</active>
+        <assignment_operator/>
+        <condition_script/>
+        <description/>
+        <event_name>email.read</event_name>
+        <filter_condition table="sys_email">subjectSTARTSWITHWtEH - Feedback^bodyLIKEwatermark:^bodyLIKEnotification_id:^bodyLIKEfeedback: 1^ORbodyLIKEfeedback: -1^EQ<item endquery="false" field="subject" goto="false" newquery="false" operator="STARTSWITH" or="false" value="WtEH - Feedback"/>
+            <item endquery="false" field="body" goto="false" newquery="false" operator="LIKE" or="false" value="watermark:"/>
+            <item endquery="false" field="body" goto="false" newquery="false" operator="LIKE" or="false" value="notification_id:"/>
+            <item endquery="false" field="body" goto="false" newquery="false" operator="LIKE" or="false" value="feedback: 1"/>
+            <item endquery="false" field="body" goto="false" newquery="false" operator="LIKE" or="true" value="feedback: -1"/>
+            <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
+        </filter_condition>
+        <from/>
+        <name>Process WtEH Feedback (WIP)</name>
+        <order>10</order>
+        <reply_email/>
+        <required_roles/>
+        <script><![CDATA[(function runAction(/*GlideRecord*/ current, /*GlideRecord*/ event, /*EmailWrapper*/ email, /*ScopedEmailLogger*/ logger, /*EmailClassifier*/ classifier) {
+	
+	//I tried building this in Flow Designer, but Flow Designer sucks and lacks half the
+	// functionality of IEAs (not to mention workflows). I wish SN would stop releasing what's
+	// effectively "beta" software and then de-emphasizing everything else before the new stuff
+	// is production-ready.
+	//
+	//Rants are my own personal opinion. I'm not affiliated with ServiceNow. Don't sue me.
+	//-Tim Woodruff
+	
+	var emailWatermark = email.body.watermark.toString().trim();
+	var notificationID = email.body.notification_id.toString().trim();
+	var feedbackVal = email.body.feedback.toString().trim();
+	var commentsFromUser = getCommentsFromBody(email.body_text.toString());
+	var fromUserID = email.from_sys_id.toString().trim();
+	
+	if (!emailWatermark || !notificationID) {
+		//Watermark and notification ID are required. Without them, we cannot submit feedback.
+		gs.warn('WtEH: Unable to log feedback from user ' + fromUserID + ' because email watermark and/or notification ID are not provided.');
+		//return false; //todo: uncomment
+	}
+	
+	current.setValue('email_watermark', emailWatermark);
+	current.setValue('notification', notificationID);
+	current.setValue('user', fromUserID);
+	current.setValue('feedback', feedbackVal);
+	current.setValue('comments', commentsFromUser);
+	
+	
+	function getCommentsFromBody(emailBodyText) {
+		var commentsIntro = 'Enter your comment here:';
+		var endCommentsIndex = emailBodyText.indexOf('----DO NOT MODIFY ANYTHING BELOW THIS LINE----');
+		var commentsText = emailBodyText.slice(0, endCommentsIndex);
+		if (commentsText.indexOf(commentsIntro) >= 0) {
+			commentsText = commentsText.replace(commentsIntro, '');
+			commentsText = commentsText.trim();
+		}
+		
+		return commentsText;
+	}
+	
+	
+})(current, event, email, logger, classifier);]]></script>
+        <stop_processing>true</stop_processing>
+        <sys_class_name>sysevent_in_email_action</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-09-08 17:24:49</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>356777fe2fc75c101ba85d492799b6e1</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>Process WtEH Feedback (WIP)</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
+        <sys_update_name>sysevent_in_email_action_356777fe2fc75c101ba85d492799b6e1</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-09-11 16:27:54</sys_updated_on>
+        <table>x_13231_helpful_em_email_feedback</table>
+        <template>userDYNAMIC2fd8e97bef3221002841f7f775c0fbc1^EQ</template>
+        <type>new</type>
+    </sysevent_in_email_action>
+</record_update>
