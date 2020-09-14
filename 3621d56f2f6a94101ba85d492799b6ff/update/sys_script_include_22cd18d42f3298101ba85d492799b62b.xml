@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_13231_helpful_em.EmailFeedbackUtilAjax</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <name>EmailFeedbackUtilAjax</name>
+        <script><![CDATA[var EmailFeedbackUtilAjax = Class.create();
+EmailFeedbackUtilAjax.prototype = Object.extendsObject(global.AbstractAjaxProcessor, {
+	
+	checkForDuplicate: function() {
+		var currentFeedbackID = this.getParameter('sysparm_feedback_id');
+		var feedbackUserID = this.getParameter('sysparm_user_id');
+		var emailWatermark = this.getParameter('sysparm_email_watermark');
+		var notificationID = this.getParameter('sysparm_notification_id');
+		//If true, allow the same user to submit multiple feedbacks on a single notification, as long
+		// as the email watermark is unique (or empty).
+		var allowMultipleFeedbacks = (gs.getProperty('x_13231_helpful_em.allow_multiple_feedbacks_from_user', 'false') == 'true');
+		
+		var grFeedback = new GlideRecord('x_13231_helpful_em_email_feedback');
+		
+		grFeedback.addQuery('user', feedbackUserID);
+		
+		if (!allowMultipleFeedbacks) {
+			grFeedback.addQuery('notification', notificationID);
+		} else if (emailWatermark) {
+			grFeedback.addQuery('email_watermark', emailWatermark);
+		}
+		
+		if (currentFeedbackID != '-1') {
+			grFeedback.addQuery('sys_id', '!=', currentFeedbackID);
+		}
+		
+		grFeedback.setLimit(1);
+		grFeedback.query();
+		
+		if (grFeedback.next()) {
+			return grFeedback.getLink();
+		}
+		
+		return false;
+		
+	},
+	
+	type: 'EmailFeedbackUtilAjax'
+});]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-08-18 21:12:06</sys_created_on>
+        <sys_id>22cd18d42f3298101ba85d492799b62b</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>EmailFeedbackUtilAjax</sys_name>
+        <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
+        <sys_update_name>sys_script_include_22cd18d42f3298101ba85d492799b62b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-26 16:33:55</sys_updated_on>
+    </sys_script_include>
+</record_update>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="ua_table_licensing_config">
+    <ua_table_licensing_config action="INSERT_OR_UPDATE">
+        <is_fulfillment>false</is_fulfillment>
+        <license_condition/>
+        <license_model>none</license_model>
+        <license_roles/>
+        <name>x_13231_helpful_em_email_feedback</name>
+        <op_delete>true</op_delete>
+        <op_insert>true</op_insert>
+        <op_update>true</op_update>
+        <owner_condition/>
+        <sys_class_name>ua_table_licensing_config</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-08-16 16:47:59</sys_created_on>
+        <sys_id>090d61722ff294501ba85d492799b6ec</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_13231_helpful_em_email_feedback</sys_name>
+        <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
+        <sys_update_name>ua_table_licensing_config_090d61722ff294501ba85d492799b6ec</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-08-16 16:47:59</sys_updated_on>
+    </ua_table_licensing_config>
+</record_update>
