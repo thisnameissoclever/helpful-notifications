@@ -6,16 +6,18 @@
         <condition_script/>
         <description/>
         <event_name>email.read</event_name>
-        <filter_condition table="sys_email">subjectSTARTSWITHWtEH - Feedback^bodyLIKEwatermark:^bodyLIKEnotification_id:^bodyLIKEfeedback: 1^ORbodyLIKEfeedback: -1^EQ<item endquery="false" field="subject" goto="false" newquery="false" operator="STARTSWITH" or="false" value="WtEH - Feedback"/>
+        <filter_condition table="sys_email">subjectSTARTSWITHWtEH - Feedback^bodyLIKEwatermark:^bodyLIKEnotification_id:^bodyLIKEfeedback: 1^ORbodyLIKEfeedback:1^ORbodyLIKEfeedback: -1^ORbodyLIKEfeedback:-1^EQ<item endquery="false" field="subject" goto="false" newquery="false" operator="STARTSWITH" or="false" value="WtEH - Feedback"/>
             <item endquery="false" field="body" goto="false" newquery="false" operator="LIKE" or="false" value="watermark:"/>
             <item endquery="false" field="body" goto="false" newquery="false" operator="LIKE" or="false" value="notification_id:"/>
             <item endquery="false" field="body" goto="false" newquery="false" operator="LIKE" or="false" value="feedback: 1"/>
+            <item endquery="false" field="body" goto="false" newquery="false" operator="LIKE" or="true" value="feedback:1"/>
             <item endquery="false" field="body" goto="false" newquery="false" operator="LIKE" or="true" value="feedback: -1"/>
+            <item endquery="false" field="body" goto="false" newquery="false" operator="LIKE" or="true" value="feedback:-1"/>
             <item endquery="true" field="" goto="false" newquery="false" operator="=" or="false" value=""/>
         </filter_condition>
         <from/>
-        <name>Process WtEH Feedback (WIP)</name>
-        <order>10</order>
+        <name>Process WtEH Feedback</name>
+        <order>1</order>
         <reply_email/>
         <required_roles/>
         <script><![CDATA[(function runAction(/*GlideRecord*/ current, /*GlideRecord*/ event, /*EmailWrapper*/ email, /*ScopedEmailLogger*/ logger, /*EmailClassifier*/ classifier) {
@@ -40,7 +42,7 @@
 		//return false; //todo: uncomment
 	}
 	
-	current.setValue('email_watermark', emailWatermark);
+	current.setValue('email_watermark', ('Ref:' + emailWatermark));
 	current.setValue('notification', notificationID);
 	current.setValue('user', fromUserID);
 	current.setValue('feedback', feedbackVal);
@@ -68,15 +70,15 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>356777fe2fc75c101ba85d492799b6e1</sys_id>
-        <sys_mod_count>12</sys_mod_count>
-        <sys_name>Process WtEH Feedback (WIP)</sys_name>
+        <sys_mod_count>15</sys_mod_count>
+        <sys_name>Process WtEH Feedback</sys_name>
         <sys_overrides/>
         <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
         <sys_policy/>
         <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
         <sys_update_name>sysevent_in_email_action_356777fe2fc75c101ba85d492799b6e1</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2020-09-11 16:27:54</sys_updated_on>
+        <sys_updated_on>2020-09-15 15:26:27</sys_updated_on>
         <table>x_13231_helpful_em_email_feedback</table>
         <template>userDYNAMIC2fd8e97bef3221002841f7f775c0fbc1^EQ</template>
         <type>new</type>
