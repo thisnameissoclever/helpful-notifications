@@ -19,7 +19,7 @@
             <sys_updated_on>2020-08-17 16:21:16</sys_updated_on>
             <value>1</value>
         </sys_choice>
-        <sys_choice_set action="INSERT_OR_UPDATE">
+        <sys_choice_set action="DELETE">
             <element>feedback</element>
             <name>x_13231_helpful_em_email_feedback</name>
             <sys_class_name>sys_choice_set</sys_class_name>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sysevent_script_action">
+    <sysevent_script_action action="DELETE">
+        <active>true</active>
+        <condition_script/>
+        <description/>
+        <event_name>login</event_name>
+        <name>Show notif on login</name>
+        <order>1</order>
+        <script><![CDATA[//todo: Query some record 
+gs.addErrorMessage('WARNING: Something\'s broken, or whatever');
+//todo: clear other msgs]]></script>
+        <synchronous>false</synchronous>
+        <sys_class_name>sysevent_script_action</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-09-17 17:00:20</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>4b4846712fdf98501ba85d492799b697</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Show notif on login</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
+        <sys_update_name>sysevent_script_action_4b4846712fdf98501ba85d492799b697</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-09-17 17:00:20</sys_updated_on>
+    </sysevent_script_action>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</application>
+        <file_path/>
+        <instance_id>86becb17db0d9f004f035d00cf961982</instance_id>
+        <instance_name>dev54393</instance_name>
+        <name>sysevent_script_action_4b4846712fdf98501ba85d492799b697</name>
+        <payload>&lt;?xml version="1.0" encoding="UTF-8"?&gt;&lt;record_update sys_domain="global" table="sysevent_script_action"&gt;&lt;sysevent_script_action action="INSERT_OR_UPDATE"&gt;&lt;active&gt;true&lt;/active&gt;&lt;condition_script/&gt;&lt;description/&gt;&lt;event_name&gt;login&lt;/event_name&gt;&lt;name&gt;Show notif on login&lt;/name&gt;&lt;order&gt;1&lt;/order&gt;&lt;script&gt;&lt;![CDATA[//todo: Query some record 
+gs.addErrorMessage('WARNING: Something\'s broken, or whatever');
+//todo: clear other msgs]]&gt;&lt;/script&gt;&lt;synchronous&gt;false&lt;/synchronous&gt;&lt;sys_class_name&gt;sysevent_script_action&lt;/sys_class_name&gt;&lt;sys_created_by&gt;admin&lt;/sys_created_by&gt;&lt;sys_created_on&gt;2020-09-17 17:00:20&lt;/sys_created_on&gt;&lt;sys_domain&gt;global&lt;/sys_domain&gt;&lt;sys_domain_path&gt;/&lt;/sys_domain_path&gt;&lt;sys_id&gt;4b4846712fdf98501ba85d492799b697&lt;/sys_id&gt;&lt;sys_mod_count&gt;0&lt;/sys_mod_count&gt;&lt;sys_name&gt;Show notif on login&lt;/sys_name&gt;&lt;sys_overrides/&gt;&lt;sys_package display_value="Was this email helpful" source="x_13231_helpful_em"&gt;3621d56f2f6a94101ba85d492799b6ff&lt;/sys_package&gt;&lt;sys_policy/&gt;&lt;sys_scope display_value="Was this email helpful"&gt;3621d56f2f6a94101ba85d492799b6ff&lt;/sys_scope&gt;&lt;sys_update_name&gt;sysevent_script_action_4b4846712fdf98501ba85d492799b697&lt;/sys_update_name&gt;&lt;sys_updated_by&gt;admin&lt;/sys_updated_by&gt;&lt;sys_updated_on&gt;2020-09-17 17:00:20&lt;/sys_updated_on&gt;&lt;/sysevent_script_action&gt;&lt;/record_update&gt;</payload>
+        <payload_hash>1767056365</payload_hash>
+        <record_name>Show notif on login</record_name>
+        <reverted_from/>
+        <source>682c308b2fb2d4501ba85d492799b665</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-09-17 17:00:20</sys_created_on>
+        <sys_id>adb80a712fdf98501ba85d492799b67c</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>1749d027eaa0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-09-17 17:00:20</sys_updated_on>
+        <type>Script Action</type>
+        <update_guid>e5b80a717ddf98502002a756675dae7c</update_guid>
+        <update_guid_history>e5b80a717ddf98502002a756675dae7c:1767056365</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2020-09-17 17:01:15</sys_created_on>
+        <sys_db_object display_value="" name="sysevent_script_action">sysevent_script_action</sys_db_object>
+        <sys_id>ee1a1d3f1a864ac59393a05a80d69849</sys_id>
+        <sys_metadata>4b4846712fdf98501ba85d492799b697</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Show notif on login</sys_name>
+        <sys_package display_value="Was this email helpful" source="x_13231_helpful_em">3621d56f2f6a94101ba85d492799b6ff</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Was this email helpful">3621d56f2f6a94101ba85d492799b6ff</sys_scope>
+        <sys_scope_delete display_value="">098464fcda91419f868610aba6630741</sys_scope_delete>
+        <sys_update_name>sysevent_script_action_4b4846712fdf98501ba85d492799b697</sys_update_name>
+        <sys_update_version display_value="sysevent_script_action_4b4846712fdf98501ba85d492799b697">adb80a712fdf98501ba85d492799b67c</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2020-09-17 17:01:15</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
